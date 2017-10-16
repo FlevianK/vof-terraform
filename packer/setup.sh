@@ -42,11 +42,6 @@ setup_vof_code() {
   rm -rf /home/vof/app
   mkdir -p /home/vof/app
   cd /home/vof/app && git clone https://FlevianK:kanaiza4388@github.com/andela/vof-tracker.git
-  # ssh-agent $(ssh-add ../~/.ssh/id_rsa; git clone git@github.com:andela/vof-tracker.git)
-  # cp -a $(pwd)/../vof-tracker /tmp/vof
-  # ln -s /Users/davidmukiibi/PROJECTS/vof-tracker /home/vof/app
-  # 'cd /home/vof/app' "ls /home/vof/app"
-  # cp -a /tmp/vof /home/vof/app/
   sudo chown -R vof:vof /home/vof/app/vof-tracker
   
   sudo su - vof -c 'cd /home/vof/app/vof-tracker && bundle install'
