@@ -126,3 +126,6 @@ variable "db_master_replica_password" {
   type = "string"
   default = "vof-replica"
 }
+variable "slack_hook_url" {
+  type = "string"
+}
