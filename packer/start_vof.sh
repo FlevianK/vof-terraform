@@ -159,6 +159,53 @@ restart_google_fuentd(){
   sudo service google-fluentd restart
 }
 
+logrotate_config() {
+  cat <<EOF > /etc/logrotate.conf
+su root root
+include /etc/logrotate.d
+/var/log/vof/vof.out.log
+/var/log/vof/vof.err.log
+{
+    daily
+    size 100M
+    rotate 4
+    create 0644 root root
+    missingok
+    notifempty
+}
+
+/var/log/wtmp {
+    missingok
+    monthly
+    create 0664 root utmp
+    rotate 1
+}
+
+/var/log/btmp {
+    missingok
+    monthly
+    create 0660 root utmp
+    rotate 1
+}
+
+EOF
+  cat > logcron <<'EOF'
+0 9 * * * sudo /usr/sbin/logrotate /etc/logrotate.conf --state --force | curl -X POST --data-urlencode "payload={\"channel\": \"#vof\", \"username\": \"Logrotate\", \"text\": \"Logs successfully rotated in $(uname -n)\n\", \"icon_emoji\": \":ghost:\"}" ${var.slack_hook_url}
+
+EOF
+}
+
+run_upgrades() {
+  cat > mycron <<'EOF'
+0 9 * * * curl -X POST --data-urlencode "payload={\"channel\": \"#vof\", \"username\": \"vof-unattended-upgrades\", \"text\": \"*Unattended upgrades report from $(uname -n)*\n>>>$(sudo unattended-upgrade -v)\", \"icon_emoji\": \":bell:\"}" ${var.slack_hook_url}
+EOF
+
+}
+cron(){
+  cat mycron logcron | crontab
+  rm mycron logcron
+}
+
 main() {
   echo "startup script invoked at $(date)" >> /tmp/script.log
 
@@ -174,6 +221,9 @@ main() {
   configure_google_fluentd_logging
   configure_log_reader_positioning
   restart_google_fuentd
+  logrotate_config
+  run_upgrades
+  cron
 
   # Setup Vault
   # source /home/vof/vault_token.sh
