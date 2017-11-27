@@ -18,6 +18,7 @@ resource "google_sql_database_instance" "vof-database-instance" {
 
   settings {
     tier = "${var.db_instance_tier}"
+    disk_autoresize = true
     ip_configuration = {
       ipv4_enabled = true
 
@@ -47,16 +48,4 @@ resource "google_sql_user" "vof-database-user" {
   password = "${random_id.vof-db-user-password.b64}"
   instance = "${google_sql_database_instance.vof-database-instance.name}"
   host = ""
-}
-
-output "vof_db_user_name" {
-  value = "${random_id.vof-db-user.b64}"
-}
-
-output "vof_db_user_password" {
-  value = "${random_id.vof-db-user-password.b64}"
-}
-
-output "vof_db_instance_ip" {
-  value = "${google_sql_database_instance.vof-database-instance.ip_address.0.ip_address}"
 }

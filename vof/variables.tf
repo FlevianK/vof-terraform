@@ -10,6 +10,13 @@ variable "zone" {
 
 variable "reserved_env_ip" {}
 
+variable "bucket" {}
+
+variable "base_image" {
+  type = "string"
+  default = "ubuntu-1604-xenial-v20170815a"
+}
+
 variable "project_id" {
   type = "string"
   default = "vof-migration-test"
@@ -126,6 +133,13 @@ variable "db_master_replica_password" {
   type = "string"
   default = "vof-replica"
 }
+<<<<<<< HEAD
 variable "slack_hook_url" {
   type = "string"
 }
+=======
+
+variable "service_account_email" {
+  type = "string"
+}
+>>>>>>> c198b0b169b72d6b1436b115fa3883e1d6e00169
