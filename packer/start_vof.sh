@@ -191,14 +191,14 @@ include /etc/logrotate.d
 
 EOF
   cat > logcron <<'EOF'
-0 9 * * * sudo /usr/sbin/logrotate /etc/logrotate.conf --state --force | curl -X POST --data-urlencode "payload={\"channel\": \"#vof\", \"username\": \"Logrotate\", \"text\": \"Logs successfully rotated in $(uname -n)\n\", \"icon_emoji\": \":ghost:\"}" ${var.slack_hook_url}
+0 9 * * * sudo /usr/sbin/logrotate /etc/logrotate.conf --state --force | curl -X POST --data-urlencode "payload={\"channel\": \"#channel\", \"username\": \"Logrotate\", \"text\": \"Logs successfully rotated in $(uname -n)\n\", \"icon_emoji\": \":sparkle:\"}" ${var.slack_hook_url}
 
 EOF
 }
 
 run_upgrades() {
   cat > mycron <<'EOF'
-0 9 * * * curl -X POST --data-urlencode "payload={\"channel\": \"#vof\", \"username\": \"vof-unattended-upgrades\", \"text\": \"*Unattended upgrades report from $(uname -n)*\n>>>$(sudo unattended-upgrade -v)\", \"icon_emoji\": \":bell:\"}" ${var.slack_hook_url}
+0 9 * * * curl -X POST --data-urlencode "payload={\"channel\": \"#channel\", \"username\": \"unattended-upgrades\", \"text\": \"*Unattended upgrades report from $(uname -n)*\n>>>$(sudo unattended-upgrade -v)\", \"icon_emoji\": \":bell:\"}" ${var.slack_hook_url}
 EOF
 
 }
