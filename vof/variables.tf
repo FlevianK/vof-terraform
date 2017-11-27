@@ -133,13 +133,10 @@ variable "db_master_replica_password" {
   type = "string"
   default = "vof-replica"
 }
-<<<<<<< HEAD
 variable "slack_hook_url" {
   type = "string"
 }
-=======
 
 variable "service_account_email" {
   type = "string"
 }
->>>>>>> c198b0b169b72d6b1436b115fa3883e1d6e00169
