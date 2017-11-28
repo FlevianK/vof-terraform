@@ -100,6 +100,3 @@ When you use workflows to orchestrate parts of your build, you increase your abi
 >To ensure the application has zero downtime during deployment, Blue-Green deployment will be used. This is a technique that reduces downtime and risk by running two identical production environments called Blue and Green. At any time, only one of the environments is live, with the live environment serving all production traffic.
 
 >Semantic Versioning which implements automated release version bumping though not initially being used by VOF on heroku is to be an added feature. This will ensure proper tracking os releases.  
-
-### Conclusion
-As per the time of the second presentation, The pipeline is halfway done serving the purposes of running the tests and deployment to a two environments (Staging and Production).
