@@ -60,11 +60,11 @@ To enable easy rollbacks, A build revert will have to be carried out. Successful
 #### Pipeline Components
 The pipeline is made up of  a number of jobs which include Build, tests, release to staging, release to production, deploy staging and deploy production. Each job inherits from the default setup where environment variables and images (custom docker image and prebuilt postgresdatabase image) to use have been declared.
 
-![screenshot](https://github.com/vof-deployment-scripts/blob/master/docs/screenshots/add_env.png)
+![screenshot](https://github.com/FlevianK/vof-terraform/blob/master/docs/screenshots/add_env.png)
 
-![screenshot](https://github.com/vof-deployment-scripts/blob/master/docs/screenshots/env_variables.png)
+![screenshot](https://github.com/FlevianK/vof-terraform/blob/master/docs/screenshots/env_variables.png)
 
-![screenshot](https://github.com/vof-deployment-scripts/blob/master/docs/screenshots/pipeline.png)
+![screenshot](https://github.com/FlevianK/vof-terraform/blob/master/docs/screenshots/pipeline.png)
 
 #### Workflows / dependacies
 A workflow is a set of rules for defining a collection of jobs and their run order that shortens the feedback loop. it helps to achieve a number of things;
@@ -80,7 +80,7 @@ VOF workflows are structured in the following way;
 >release to production which is of a manual approval filtering the master branch only.
 >deploy staging (required release to production). works on master branch only.
 
-![screenshot](https://github.com/vof-deployment-scripts/blob/master/docs/screenshots/workflows.png)
+![screenshot](https://github.com/FlevianK/vof-terraform/blob/master/docs/screenshots/workflows.png)
 
 #### Approvals
 We used them to hold a Workflow for a Manual Approval. Workflows may be configured to wait for manual approval of a job before continuing by using the type: approval key. The type: approval key is a special job and type that is only added under in your workflow key.
@@ -88,12 +88,12 @@ We used them to hold a Workflow for a Manual Approval. Workflows may be configur
 In the VOF pipeline, release to staging and release to production jobs which are depended on by both deploys will not run until you click the hold job in the Workflows page of the CircleCI app and then click Approve. Notice that the hold job must have a unique name that is not used by any other job. The workflow will wait with the status of On Hold until you click the job and Approve. After you approve the job with type: approval, the jobs which require the approval job will start.
 
 Example of an approval prompt.
-![screenshot](https://github.com/vof-deployment-scripts/blob/master/docs/screenshots/approvals.png)
+![screenshot](https://github.com/FlevianK/vof-terraform/blob/master/docs/screenshots/approvals.png)
 
 #### Re-running a job
 When you use workflows to orchestrate parts of your build, you increase your ability to respond to failures rapidly. Click the Workflows icon in the app and select a workflow to see the status of each job as shown in the next screenshot. Click the Rerun button and select From failed to restart only the failed job and continue the workflow. Only jobs after the failure will run, saving time and resources.
 
-![screenshot](https://github.com/vof-deployment-scripts/blob/master/docs/screenshots/rerun.png)
+![screenshot](https://github.com/FlevianK/vof-terraform/blob/master/docs/screenshots/rerun.png)
 
 > To-Do's
 To ensure the application has zero downtime during deployment, Blue-Green deployment will be used. This is a technique that reduces downtime and risk by running two identical production environments called Blue and Green. At any time, only one of the environments is live, with the live environment serving all production traffic.
